@@ -8,12 +8,17 @@ public class Driver : MonoBehaviour
 
 
     [SerializeField] float rotateSpeed = 150f;
-    [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float boostMoveSpeed = 50f;
+    [SerializeField] float baseMoveSpeed = 20f;
+    [SerializeField] float boostTime = 1f;
+
+    float currentMoveSpeed;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        currentMoveSpeed = baseMoveSpeed;
        
     }
 
@@ -23,7 +28,7 @@ public class Driver : MonoBehaviour
 
 
         float steerAmount = Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime;
-        float moveAmount = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+        float moveAmount = Input.GetAxis("Vertical") * currentMoveSpeed * Time.deltaTime;
 
         transform.Translate(0, moveAmount, 0);
 
@@ -36,16 +41,29 @@ public class Driver : MonoBehaviour
 
         }
         
-
-
-
-
-        
-
-
         
     }
 
+
+    public void ApplyBoost()
+    {
+        StartCoroutine(BoostDuration());
+    }
+
+
+
     
+    private IEnumerator BoostDuration()
+    {
+
+        currentMoveSpeed = boostMoveSpeed;
+
+        yield return new WaitForSeconds(boostTime);
+
+        currentMoveSpeed = baseMoveSpeed;
+
+    }
+
+
     
 }

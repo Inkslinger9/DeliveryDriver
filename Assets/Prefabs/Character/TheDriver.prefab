@@ -102,7 +102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 200
-  moveSpeed: 20
+  boostMoveSpeed: 28
+  baseMoveSpeed: 20
+  boostTime: 3
 --- !u!61 &8799490388141962749
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -176,4 +178,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickUps: []
   customers: []
+  boostPickups: []
+  boostSpawnTimer: 10
   arrowImage: {fileID: 0}

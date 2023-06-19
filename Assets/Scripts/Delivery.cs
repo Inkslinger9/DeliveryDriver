@@ -10,16 +10,29 @@ public class Delivery : MonoBehaviour
     bool hasPackage = false;
     [SerializeField] GameObject[] pickUps;
     [SerializeField] GameObject[] customers;
+    [SerializeField] GameObject[] boostPickups;
+    [SerializeField] float boostSpawnTimer;
 
     [SerializeField] Image arrowImage;
     private Transform activeCustomer;
 
+    private Driver driver;
+
 
     private void Start()
     {
+
+        driver = GetComponent<Driver>();
+
         pickUps = GameObject.FindGameObjectsWithTag("Pickup");
         customers = GameObject.FindGameObjectsWithTag("Customer");
+        boostPickups = GameObject.FindGameObjectsWithTag("Boost");
+
+        DeactivateAllBoostPickups();
         AllCustomersVisable(hasPackage);
+
+        StartCoroutine(ActivateRandomBoostTimer());
+
     }
 
 
@@ -68,6 +81,10 @@ public class Delivery : MonoBehaviour
             hasPackage = false;
             AllCustomersVisable(hasPackage);
             SetActiveCustomer(null);
+        }else if (collision.tag == "Boost")
+        {
+            driver.ApplyBoost();
+            collision.gameObject.SetActive(false);
         }
         
        
@@ -108,6 +125,40 @@ public class Delivery : MonoBehaviour
         activeCustomer = customerTransform;
     }
 
+
+
+
+    private IEnumerator ActivateRandomBoostTimer()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(boostSpawnTimer);
+
+            DeactivateAllBoostPickups();
+
+            ActivateRandomBoostPickup();
+
+        }
+
+    }
+
+
+    private void DeactivateAllBoostPickups()
+    {
+        foreach (GameObject boostPickup in boostPickups)
+        {
+            boostPickup.SetActive(false);
+        }
+    }
+
+    private void ActivateRandomBoostPickup()
+    {
+       
+        int randomIndex = UnityEngine.Random.Range(0, boostPickups.Length);
+
+        
+        boostPickups[randomIndex].SetActive(true);
+    }
 
 
 }

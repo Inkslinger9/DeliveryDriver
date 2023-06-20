@@ -34,12 +34,12 @@ public class Driver : MonoBehaviour
 
 
 
-        if (moveAmount != 0)
-        {
+       if (moveAmount != 0)
+       {
 
             transform.Rotate(0, 0, -steerAmount);
 
-        }
+       }
         
         
     }

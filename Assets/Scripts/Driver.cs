@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -25,8 +26,12 @@ public class Driver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Movement();
 
+    }
 
+    public void Movement()
+    {
         float steerAmount = Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime;
         float moveAmount = Input.GetAxis("Vertical") * currentMoveSpeed * Time.deltaTime;
 
@@ -34,18 +39,15 @@ public class Driver : MonoBehaviour
 
 
 
-       if (moveAmount != 0)
-       {
+        if (moveAmount != 0)
+        {
 
             transform.Rotate(0, 0, -steerAmount);
 
-       }
-        
-        
+        }
     }
 
-
-    public void ApplyBoost()
+   public void ApplyBoost()
     {
         StartCoroutine(BoostDuration());
     }
@@ -67,3 +69,5 @@ public class Driver : MonoBehaviour
 
     
 }
+
+

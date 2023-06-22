@@ -35,6 +35,8 @@ public class Delivery : MonoBehaviour
 
 
 
+
+
     private void Start()
     {
         score = 0;
@@ -146,7 +148,7 @@ public class Delivery : MonoBehaviour
 
 
 
-    private void AllPickupsVisable(bool status)
+    protected void AllPickupsVisable(bool status)
     {
         
         
@@ -157,7 +159,7 @@ public class Delivery : MonoBehaviour
     }
 
 
-    private void AllCustomersVisable(bool status)
+    protected void AllCustomersVisable(bool status)
     {
     
         foreach (GameObject obj in customers)
@@ -192,7 +194,7 @@ public class Delivery : MonoBehaviour
     }
 
 
-    private void DeactivateAllBoostPickups()
+    protected void DeactivateAllBoostPickups()
     {
         foreach (GameObject boostPickup in boostPickups)
         {
@@ -200,7 +202,7 @@ public class Delivery : MonoBehaviour
         }
     }
 
-    private void ActivateRandomBoostPickup()
+    protected void ActivateRandomBoostPickup()
     {
        
         int randomIndex = UnityEngine.Random.Range(0, boostPickups.Length);
